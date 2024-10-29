@@ -91,6 +91,15 @@ const staticTitles = [
       title: 'Reddit Ideator',
       desc: ['Turn on active Reddit thread into a compelling piece of content']
     }
+  },
+  {
+    pathname: '/tools/ice-breaker',
+    data: {
+      title: 'LinkedIn Ice Breaker',
+      desc: [
+        "Provide the sender's and recipient's LinkedIn profiles to discover the best approach for making a connection."
+      ]
+    }
   }
 ]
 
@@ -135,8 +144,8 @@ export const Header = () => {
       })
     } else {
       setIsLoading(false)
-      // const foundTitle = staticTitles.find(t => t.pathname === pathname)?.data
-      // setMetadata(foundTitle || null)
+      const foundTitle = staticTitles.find(t => t.pathname === pathname)?.data
+      setMetadata((foundTitle as ClientMetadata) || null)
     }
   }, [params])
 

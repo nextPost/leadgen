@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
@@ -10,6 +10,9 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
+import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
+import { fetcher } from '@/lib/utils'
+import { Skeleton } from '@radix-ui/themes'
 
 const example = {
   recipientInfo: {
@@ -223,24 +226,84 @@ const example = {
   ]
 }
 
-export default function IceBreaker({ data }: { data: typeof example }) {
+export default function IceBreaker() {
+  const { iceBreakerLinkedins } = useFreeChatContext()
+  const [data, setData] = useState<typeof example>()
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [loadingStates, setLoadingStates] = useState({
+    intro: false,
+    briefOverview: false,
+    professionalNotes: false,
+    postingActivity: false,
+    commonGround: false,
+    iceBreakers: false
+  })
+
+  useEffect(() => {
+    // Fetch data if LinkedIn links are available
+    if (iceBreakerLinkedins.length === 2) {
+      fetcher(
+        `/api/tools/ice-breaker?senderLink=${iceBreakerLinkedins[0]}&receipientLink=${iceBreakerLinkedins[0]}`
+      )
+        .then(response => {
+          setData(response.data)
+          showSectionsProgressively()
+        })
+        .catch(e => console.error(e))
+    }
+  }, [iceBreakerLinkedins])
+
+  const showSectionsProgressively = () => {
+    const sectionOrder = [
+      'intro',
+      'briefOverview',
+      'professionalNotes',
+      'postingActivity',
+      'commonGround',
+      'iceBreakers'
+    ]
+
+    // Display each section progressively with a 1-second delay
+    sectionOrder.forEach((section, index) => {
+      setTimeout(() => {
+        setLoadingStates(prev => ({ ...prev, [section]: true }))
+        // window.scrollTo({
+        //   top: document.body.scrollHeight,
+        //   behavior: 'smooth'
+        // })
+      }, index * 2000)
+    })
+  }
 
   const nextSlide = () => {
-    setCurrentSlide(prev => (prev + 1) % data.iceBreakers.length)
+    if (data) {
+      setCurrentSlide(prev => (prev + 1) % data.iceBreakers.length)
+    }
   }
 
   const prevSlide = () => {
-    setCurrentSlide(
-      prev => (prev - 1 + data.iceBreakers.length) % data.iceBreakers.length
-    )
+    if (data) {
+      setCurrentSlide(
+        prev => (prev - 1 + data.iceBreakers.length) % data.iceBreakers.length
+      )
+    }
   }
 
   const renderTable = (data: any) => (
-    <Table>
-      <TableBody>
+    <Table className="text-[#e0e0e0] rounded-md">
+      <TableBody className="rounded-md">
         {data.map((item: any, index: number) => (
-          <TableRow key={index}>
+          <TableRow
+            key={index}
+            style={{
+              backgroundColor: index % 2 === 0 ? '#243b4a' : '#2b3a45',
+              // color: index === 0 ? '#82d8d8' : '',
+              padding: '12px',
+              textAlign: 'left',
+              fontWeight: 'bold',
+              borderBottom: '1px solid #4a7c7c'
+            }}
+          >
             <TableCell className="font-medium">{item.field}</TableCell>
             <TableCell>{item.value}</TableCell>
           </TableRow>
@@ -250,174 +313,222 @@ export default function IceBreaker({ data }: { data: typeof example }) {
   )
 
   return (
-    <div className="w-full max-w-4xl mx-auto  text-white">
-      <h2 className="text-3xl font-bold mb-8 text-center text-white">
+    <div className="w-full max-w-4xl mx-auto text-white">
+      <h2 className="text-3xl font-bold mb-8 text-center text-teal-500">
         Recipient Profile & Ice Breakers
       </h2>
 
-      <div className="space-y-8 mb-12">
-        <section>
-          <h3 className="text-2xl font-bold mb-4 text-white">1. Intro</h3>
-          <p className="text-white">{data.recipientInfo.intro}</p>
-        </section>
+      {data ? (
+        <>
+          <div className="space-y-8 mb-12">
+            <section>
+              <h3 className="text-2xl font-bold mb-4 text-teal-500">
+                🚀 Intro
+              </h3>
+              {loadingStates.intro ? (
+                <p className="text-white">{data.recipientInfo.intro}</p>
+              ) : (
+                <Skeleton height="20px" />
+              )}
+            </section>
 
-        <section>
-          <h3 className="text-2xl font-bold mb-4 text-white">
-            2. Brief Overview
-          </h3>
-          {renderTable(data.recipientInfo.briefOverview)}
-        </section>
+            <section>
+              <h3 className="text-2xl font-bold mb-4 text-teal-500">
+                📋 Brief Overview
+              </h3>
+              {loadingStates.briefOverview ? (
+                renderTable(data.recipientInfo.briefOverview)
+              ) : (
+                <Skeleton height="100px" />
+              )}
+            </section>
 
-        <section>
-          <h3 className="text-2xl font-bold mb-4 text-white">
-            3. Professional Notes
-          </h3>
-          {renderTable(data.recipientInfo.professionalNotes)}
-        </section>
+            <section>
+              <h3 className="text-2xl font-bold mb-4 text-teal-500">
+                📈 Professional Notes
+              </h3>
+              {loadingStates.professionalNotes ? (
+                renderTable(data.recipientInfo.professionalNotes)
+              ) : (
+                <Skeleton height="100px" />
+              )}
+            </section>
 
-        <section>
-          <h3 className="text-2xl font-bold mb-4 text-white">
-            4. Posting Activity
-          </h3>
-          <p className="text-white mb-4">
-            {data.recipientInfo.postingActivity.summary}
-          </p>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Topic</TableHead>
-                <TableHead>Summary</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {data.recipientInfo.postingActivity.topics.map((topic, i) => (
-                <TableRow key={i}>
-                  <TableCell className="font-medium">{topic.title}</TableCell>
-                  <TableCell>{topic.summary}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </section>
+            <section>
+              <h3 className="text-2xl font-bold mb-4 text-teal-500">
+                📣 Posting Activity
+              </h3>
+              {loadingStates.postingActivity ? (
+                <>
+                  <p className="text-white mb-4">
+                    {data.recipientInfo.postingActivity.summary}
+                  </p>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Topic</TableHead>
+                        <TableHead>Summary</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {data.recipientInfo.postingActivity.topics.map(
+                        (topic, i) => (
+                          <TableRow key={i}>
+                            <TableCell className="font-medium">
+                              {topic.title}
+                            </TableCell>
+                            <TableCell>{topic.summary}</TableCell>
+                          </TableRow>
+                        )
+                      )}
+                    </TableBody>
+                  </Table>
+                </>
+              ) : (
+                <Skeleton height="150px" />
+              )}
+            </section>
 
-        <section>
-          <h3 className="text-2xl font-bold mb-4 text-white">
-            5. Common Ground
-          </h3>
-          <ul className="list-none space-y-4">
-            {data.recipientInfo.commonGround.map((item, i) => (
-              <li key={i} className="flex items-start">
-                <span className="mr-4 text-2xl">{item.emoji}</span>
-                <div>
-                  <h4 className="font-bold text-white">{item.title}</h4>
-                  <p className="text-white">{item.summary}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
-
-      <section>
-        <h3 className="text-2xl font-bold mb-4 text-white text-center">
-          6. Ice Breakers
-        </h3>
-        <div className="relative px-12">
-          <div className="overflow-hidden">
-            <div
-              className="flex transition-transform duration-300 ease-in-out"
-              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-            >
-              {data.iceBreakers.map((breaker, index) => (
-                <Card
-                  key={index}
-                  className="w-full flex-shrink-0 bg-[#243B4A] border-[#4A7C7C]"
-                >
-                  <CardContent className="p-6 overflow-y-auto max-h-[70vh]">
-                    <h4 className="text-xl font-bold text-white text-center mb-4">
-                      {breaker.headline}
-                    </h4>
-                    <div className="space-y-4">
+            <section>
+              <h3 className="text-2xl font-bold mb-4 text-teal-500">
+                🌐 Common Ground
+              </h3>
+              {loadingStates.commonGround ? (
+                <ul className="list-none space-y-4">
+                  {data.recipientInfo.commonGround.map((item, i) => (
+                    <li key={i} className="flex items-start">
+                      <span className="mr-4 text-2xl">{item.emoji}</span>
                       <div>
-                        <h5 className="font-semibold mb-2 text-[#E85A4F]">
-                          Explanation:
-                        </h5>
-                        <p className="text-white">{breaker.explanation}</p>
+                        <h4 className="font-bold text-white">{item.title}</h4>
+                        <p className="text-white">{item.summary}</p>
                       </div>
-                      <div>
-                        <h5 className="font-semibold mb-2 text-[#E85A4F]">
-                          Email Subject Lines:
-                        </h5>
-                        <ul className="list-disc pl-5 text-white">
-                          {breaker.subjects.map((subject, i) => (
-                            <li key={i}>{subject}</li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <h5 className="font-semibold mb-2 text-[#E85A4F]">
-                          Email Intro Sentences:
-                        </h5>
-                        <ul className="list-disc pl-5 text-white">
-                          {breaker.intros.map((intro, i) => (
-                            <li key={i}>{intro}</li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <h5 className="font-semibold mb-2 text-[#E85A4F]">
-                          LinkedIn Connection Messages:
-                        </h5>
-                        <ul className="list-disc pl-5 text-white">
-                          {breaker.connections.map((connection, i) => (
-                            <li key={i}>{connection}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <Skeleton height="150px" />
+              )}
+            </section>
           </div>
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-[#4A7C7C] text-white border-2 border-white hover:bg-[#3A6B6B] hover:text-white"
-            onClick={prevSlide}
-          >
-            <ChevronLeft className="h-4 w-4" />
-            <span className="sr-only">Previous ice breaker</span>
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-[#4A7C7C] text-white border-2 border-white hover:bg-[#3A6B6B] hover:text-white"
-            onClick={nextSlide}
-          >
-            <ChevronRight className="h-4 w-4" />
-            <span className="sr-only">Next ice breaker</span>
-          </Button>
-        </div>
-        <div className="flex justify-center mt-4">
-          {data.iceBreakers.map((_, index) => (
-            <Button
-              key={index}
-              variant={currentSlide === index ? 'default' : 'outline'}
-              size="sm"
-              className={`mx-1 ${
-                currentSlide === index
-                  ? 'bg-[#E85A4F] text-white hover:bg-[#D74940] hover:text-white'
-                  : 'bg-[#4A7C7C] text-white border-[#4A7C7C] hover:bg-[#3A6B6B] hover:text-white'
-              }`}
-              onClick={() => setCurrentSlide(index)}
-            >
-              {index + 1}
-              <span className="sr-only">Go to ice breaker {index + 1}</span>
-            </Button>
-          ))}
-        </div>
-      </section>
+
+          <section>
+            <h3 className="text-2xl font-bold mb-4 text-teal-500 text-center">
+              6. Ice Breakers
+            </h3>
+            {loadingStates.iceBreakers ? (
+              <>
+                <div className="relative">
+                  <div className="overflow-hidden">
+                    <div
+                      className="flex transition-transform duration-300 ease-in-out"
+                      style={{
+                        transform: `translateX(-${currentSlide * 100}%)`
+                      }}
+                    >
+                      {data.iceBreakers.map((breaker, index) => (
+                        <Card
+                          key={index}
+                          className="w-full flex-shrink-0 bg-[#243B4A] border-[#4A7C7C]"
+                        >
+                          <CardContent className="p-6 overflow-y-auto max-h-[70vh]">
+                            <h4 className="text-xl font-bold text-white text-center mb-4">
+                              {breaker.headline}
+                            </h4>
+                            <div className="space-y-4">
+                              <div>
+                                <h5 className="font-semibold mb-2 text-[#E85A4F]">
+                                  Explanation:
+                                </h5>
+                                <p className="text-white">
+                                  {breaker.explanation}
+                                </p>
+                              </div>
+                              <div>
+                                <h5 className="font-semibold mb-2 text-[#E85A4F]">
+                                  Email Subject Lines:
+                                </h5>
+                                <ul className="list-disc pl-5 text-white">
+                                  {breaker.subjects.map((subject, i) => (
+                                    <li key={i}>{subject}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                              <div>
+                                <h5 className="font-semibold mb-2 text-[#E85A4F]">
+                                  Email Intro Sentences:
+                                </h5>
+                                <ul className="list-disc pl-5 text-white">
+                                  {breaker.intros.map((intro, i) => (
+                                    <li key={i}>{intro}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                              <div>
+                                <h5 className="font-semibold mb-2 text-[#E85A4F]">
+                                  LinkedIn Connection Messages:
+                                </h5>
+                                <ul className="list-disc pl-5 text-white">
+                                  {breaker.connections.map((connection, i) => (
+                                    <li key={i}>{connection}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex relative justify-center mt-4">
+                  {data.iceBreakers.map((_, index) => (
+                    <Button
+                      key={index}
+                      variant={currentSlide === index ? 'default' : 'outline'}
+                      size="sm"
+                      className={`mx-1 ${
+                        currentSlide === index
+                          ? 'bg-[#E85A4F] text-white hover:bg-[#D74940] hover:text-white'
+                          : 'bg-[#4A7C7C] text-white border-[#4A7C7C] hover:bg-[#3A6B6B] hover:text-white'
+                      }`}
+                      onClick={() => setCurrentSlide(index)}
+                    >
+                      {index + 1}
+                      <span className="sr-only">
+                        Go to ice breaker {index + 1}
+                      </span>
+                    </Button>
+                  ))}
+
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-[#4A7C7C] text-white border-2 border-white hover:bg-[#3A6B6B] hover:text-white"
+                    onClick={prevSlide}
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                    <span className="sr-only">Previous ice breaker</span>
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-[#4A7C7C] text-white border-2 border-white hover:bg-[#3A6B6B] hover:text-white"
+                    onClick={nextSlide}
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                    <span className="sr-only">Next ice breaker</span>
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <Skeleton height="100px" />
+            )}
+          </section>
+        </>
+      ) : (
+        <Skeleton height="300px" />
+      )}
     </div>
   )
 }

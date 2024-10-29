@@ -73,7 +73,7 @@ export function EmailInputMessage() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4 text-sm">
-      <h1 className="text-xl font-semibold">Report Ready</h1>
+      <h1 className="text-xl font-semibold text-teal-500">Report Ready</h1>
       <p>Thank you for providing your profile details.</p>
       <p>
         To receive the analysis, which includes a detailed breakdown of the

@@ -137,7 +137,7 @@ The JSON format should follow this structure, with **at least 5 items** in both 
   },
   "iceBreakers": [
     {
-      "headline": "A headline for the icebreaker topic",
+      "headline": "Emoji: A headline for the icebreaker topic",
       "explanation": "An explanation of why this topic is relevant to the recipient and how the sender can use it as an icebreaker.",
       "subjects": [
         "Suggested email subject line 1",
@@ -156,7 +156,7 @@ The JSON format should follow this structure, with **at least 5 items** in both 
       ]
     },
     {
-      "headline": "Another headline for the icebreaker topic",
+      "headline": "Emoji: Another headline for the icebreaker topic",
       "explanation": "Another explanation relevant to the recipient.",
       "subjects": [
         "Suggested email subject line 1",
@@ -175,7 +175,7 @@ The JSON format should follow this structure, with **at least 5 items** in both 
       ]
     },
     {
-      "headline": "A third headline for the icebreaker topic",
+      "headline": "Emoji: A third headline for the icebreaker topic",
       "explanation": "Another explanation relevant to the recipient.",
       "subjects": [
         "Suggested email subject line 1",
@@ -194,7 +194,7 @@ The JSON format should follow this structure, with **at least 5 items** in both 
       ]
     },
     {
-      "headline": "A fourth headline for the icebreaker topic",
+      "headline": "Emoji: A fourth headline for the icebreaker topic",
       "explanation": "Another explanation relevant to the recipient.",
       "subjects": [
         "Suggested email subject line 1",
@@ -213,7 +213,7 @@ The JSON format should follow this structure, with **at least 5 items** in both 
       ]
     },
     {
-      "headline": "A fifth headline for the icebreaker topic",
+      "headline": "Emoji: A fifth headline for the icebreaker topic",
       "explanation": "Another explanation relevant to the recipient.",
       "subjects": [
         "Suggested email subject line 1",

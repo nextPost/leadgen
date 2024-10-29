@@ -28,12 +28,16 @@ export function InitialMessage() {
     e.preventDefault()
     setError('')
 
-    if (!senderLink || !receipientLink) {
-      setError('Enter LinkedIn profile URLs.')
+    const regex = /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[\w-]+\/?$/
+    if (
+      !senderLink ||
+      !receipientLink ||
+      !regex.test(senderLink) ||
+      !regex.test(receipientLink)
+    ) {
+      setError('Enter valid LinkedIn profile URLs.')
       return
     }
-    // const regex = /^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[\w-]+\/?$/
-    //  process linkedin profile link
 
     setIceBreakerLinkedins([senderLink, receipientLink])
     showPrompts(

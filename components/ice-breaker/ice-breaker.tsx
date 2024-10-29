@@ -13,6 +13,7 @@ import {
 import { useFreeChatContext } from '@/lib/hooks/use-free-chat'
 import { fetcher } from '@/lib/utils'
 import { Skeleton } from '@radix-ui/themes'
+import { ChatSpinner } from '../stocks/ChatSpinner'
 
 const example = {
   recipientInfo: {
@@ -522,12 +523,12 @@ export default function IceBreaker() {
                 </div>
               </>
             ) : (
-              <Skeleton height="100px" />
+              <Skeleton height="200px" />
             )}
           </section>
         </>
       ) : (
-        <Skeleton height="300px" />
+        <ChatSpinner />
       )}
     </div>
   )

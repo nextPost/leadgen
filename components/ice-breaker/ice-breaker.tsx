@@ -244,7 +244,7 @@ export default function IceBreaker() {
     // Fetch data if LinkedIn links are available
     if (iceBreakerLinkedins.length === 2) {
       fetcher(
-        `/api/tools/ice-breaker?senderLink=${iceBreakerLinkedins[0]}&receipientLink=${iceBreakerLinkedins[0]}`
+        `/api/tools/ice-breaker?senderLink=${iceBreakerLinkedins[0]}&receipientLink=${iceBreakerLinkedins[1]}`
       )
         .then(response => {
           setData(response.data)

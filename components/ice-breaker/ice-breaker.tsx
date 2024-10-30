@@ -319,7 +319,7 @@ export default function IceBreaker() {
         Recipient Profile & Ice Breakers
       </h2>
 
-      {data ? (
+      {!data ? (
         <>
           <div className="space-y-8 mb-12">
             <section>
@@ -550,7 +550,10 @@ export default function IceBreaker() {
           </section>
         </>
       ) : (
-        <ChatSpinner />
+        <div className="flex gap-2">
+          <ChatSpinner />
+          <p>Analyzing the result. This could take up to one minute.</p>
+        </div>
       )}
     </div>
   )

@@ -314,8 +314,8 @@ export default function IceBreaker() {
   )
 
   return (
-    <div className="w-full max-w-4xl mx-auto text-white">
-      <h2 className="text-3xl font-bold mb-8 text-center text-teal-500">
+    <div className="w-full max-w-4xl mx-auto text-white text-sm md:text-base">
+      <h2 className="text-xl md:text-3xl font-bold mb-4 md:mb-8 text-center text-teal-500">
         Recipient Profile & Ice Breakers
       </h2>
 
@@ -323,7 +323,7 @@ export default function IceBreaker() {
         <>
           <div className="space-y-8 mb-12">
             <section>
-              <h3 className="text-2xl font-bold mb-4 text-teal-500">
+              <h3 className="text-lg md:text-2xl font-bold mb-4 text-teal-500">
                 🚀 Intro
               </h3>
               {loadingStates.intro ? (
@@ -334,7 +334,7 @@ export default function IceBreaker() {
             </section>
 
             <section>
-              <h3 className="text-2xl font-bold mb-4 text-teal-500">
+              <h3 className="text-lg md:text-2xl font-bold mb-4 text-teal-500">
                 📋 Brief Overview
               </h3>
               {loadingStates.briefOverview ? (
@@ -345,7 +345,7 @@ export default function IceBreaker() {
             </section>
 
             <section>
-              <h3 className="text-2xl font-bold mb-4 text-teal-500">
+              <h3 className="text-lg md:text-2xl font-bold mb-4 text-teal-500">
                 📈 Professional Notes
               </h3>
               {loadingStates.professionalNotes ? (
@@ -356,7 +356,7 @@ export default function IceBreaker() {
             </section>
 
             <section>
-              <h3 className="text-2xl font-bold mb-4 text-teal-500">
+              <h3 className="text-lg md:text-2xl font-bold mb-4 text-teal-500">
                 📣 Posting Activity
               </h3>
               {loadingStates.postingActivity ? (
@@ -411,14 +411,16 @@ export default function IceBreaker() {
             </section>
 
             <section>
-              <h3 className="text-2xl font-bold mb-4 text-teal-500">
+              <h3 className="text-lg md:text-2xl font-bold mb-4 text-teal-500">
                 🌐 Common Ground
               </h3>
               {loadingStates.commonGround ? (
                 <ul className="list-none space-y-4">
                   {data.recipientInfo.commonGround.map((item, i) => (
                     <li key={i} className="flex items-start">
-                      <span className="mr-4 text-2xl">{item.emoji}</span>
+                      <span className="mr-4 text-lg md:text-2xl">
+                        {item.emoji}
+                      </span>
                       <div>
                         <h4 className="font-bold text-white">{item.title}</h4>
                         <p className="text-white">{item.summary}</p>
@@ -433,8 +435,8 @@ export default function IceBreaker() {
           </div>
 
           <section>
-            <h3 className="text-2xl font-bold mb-4 text-teal-500 text-center">
-              6. Ice Breakers
+            <h3 className="text-lg md:text-2xl font-bold mb-4 text-teal-500 text-center">
+              🧊 Ice Breakers
             </h3>
             {loadingStates.iceBreakers ? (
               <>

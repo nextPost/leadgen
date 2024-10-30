@@ -319,7 +319,7 @@ export default function IceBreaker() {
         Recipient Profile & Ice Breakers
       </h2>
 
-      {!data ? (
+      {data ? (
         <>
           <div className="space-y-8 mb-12">
             <section>

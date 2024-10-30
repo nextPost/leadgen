@@ -364,17 +364,37 @@ export default function IceBreaker() {
                   <p className="text-white mb-4">
                     {data.recipientInfo.postingActivity.summary}
                   </p>
-                  <Table>
+                  <Table className="text-[#e0e0e0] rounded-md">
                     <TableHeader>
-                      <TableRow>
+                      <TableRow
+                        style={{
+                          backgroundColor: '#243b4a',
+                          // color: index === 0 ? '#82d8d8' : '',
+                          padding: '12px',
+                          textAlign: 'left',
+                          fontWeight: 'bold',
+                          borderBottom: '1px solid #4a7c7c'
+                        }}
+                      >
                         <TableHead>Topic</TableHead>
                         <TableHead>Summary</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       {data.recipientInfo.postingActivity.topics.map(
-                        (topic, i) => (
-                          <TableRow key={i}>
+                        (topic, index) => (
+                          <TableRow
+                            key={index}
+                            style={{
+                              backgroundColor:
+                                index % 2 === 0 ? '#2b3a45' : '#243b4a',
+                              // color: index === 0 ? '#82d8d8' : '',
+                              padding: '12px',
+                              textAlign: 'left',
+                              fontWeight: 'bold',
+                              borderBottom: '1px solid #4a7c7c'
+                            }}
+                          >
                             <TableCell className="font-medium">
                               {topic.title}
                             </TableCell>

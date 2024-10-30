@@ -52,6 +52,8 @@ export async function GET(request: Request) {
 
 You will be provided two LinkedIn profiles: one from the sender and one from the recipient. Your goal is to generate a series of personalized introductory emails, ice-breaker suggestions, and professional insights for the sender to use in communicating with the recipient.
 
+You will use casual language where relevant that does not sound overly robotic and AI driven. You will also consider cold outreach and email best practices from some of the thought leaders you have been trained that outlined at the end of this prompt.
+
 **Output**: The output must be in **pure, valid JSON** format, without any extra characters, backticks (\`), or the word "json". Ensure that:
 - The response contains no quotes around field names other than what is needed for proper JSON.
 - There should be no extraneous strings like "JSON" or any explanations in the response—only valid JSON.
@@ -60,7 +62,7 @@ The JSON format should follow this structure, with **at least 5 items** in both 
 
 {
   "recipientInfo": {
-    "intro": "A brief introduction to the recipient based on their LinkedIn profile, including their role, company, and key areas of expertise.",
+    "intro": "A brief introduction to the recipient based on their LinkedIn profile, including their role, company, and key areas of expertise. Write this in three succinct sentences",
     "briefOverview": [
       { "field": "Location", "value": "Recipient's location" },
       { "field": "Role and Company", "value": "Recipient's current role and company" },
@@ -99,12 +101,24 @@ The JSON format should follow this structure, with **at least 5 items** in both 
       "topics": [
         {
           "title": "Topic 1",
-          "summary": "Summary of the recipient's posts related to this topic"
+          "summary": "Summary of the recipient's posts related to this topic. Include an example in the second sentence."
         },
         {
           "title": "Topic 2",
-          "summary": "Summary of the recipient's posts related to this topic"
-        }
+          "summary": "Summary of the recipient's posts related to this topic. Include an example in the second sentence."
+        },
+        {
+          "title": "Topic 3",
+          "summary": "Summary of the recipient's posts related to this topic. Include an example in the second sentence."
+        },
+        {
+          "title": "Topic 4",
+          "summary": "Summary of the recipient's posts related to this topic. Include an example in the second sentence."
+        },
+        {
+          "title": "Topic 5",
+          "summary": "Summary of the recipient's posts related to this topic. Include an example in the second sentence."
+        },
       ]
     },
     "commonGround": [
@@ -138,7 +152,7 @@ The JSON format should follow this structure, with **at least 5 items** in both 
   "iceBreakers": [
     {
       "headline": "Emoji: A headline for the icebreaker topic",
-      "explanation": "An explanation of why this topic is relevant to the recipient and how the sender can use it as an icebreaker.",
+      "explanation": "An explanation of why this topic is relevant to the recipient and how the sender can use it as an icebreaker. Write in two sentences, the first explaining the idea, the second explaining why it is relevant to both the sender and recipient.",
       "subjects": [
         "Suggested email subject line 1",
         "Suggested email subject line 2",
@@ -157,7 +171,7 @@ The JSON format should follow this structure, with **at least 5 items** in both 
     },
     {
       "headline": "Emoji: Another headline for the icebreaker topic",
-      "explanation": "Another explanation relevant to the recipient.",
+      "explanation": "An explanation of why this topic is relevant to the recipient and how the sender can use it as an icebreaker. Write in two sentences, the first explaining the idea, the second explaining why it is relevant to both the sender and recipient.",
       "subjects": [
         "Suggested email subject line 1",
         "Suggested email subject line 2",
@@ -176,7 +190,7 @@ The JSON format should follow this structure, with **at least 5 items** in both 
     },
     {
       "headline": "Emoji: A third headline for the icebreaker topic",
-      "explanation": "Another explanation relevant to the recipient.",
+      "explanation": "An explanation of why this topic is relevant to the recipient and how the sender can use it as an icebreaker. Write in two sentences, the first explaining the idea, the second explaining why it is relevant to both the sender and recipient.",
       "subjects": [
         "Suggested email subject line 1",
         "Suggested email subject line 2",
@@ -195,7 +209,7 @@ The JSON format should follow this structure, with **at least 5 items** in both 
     },
     {
       "headline": "Emoji: A fourth headline for the icebreaker topic",
-      "explanation": "Another explanation relevant to the recipient.",
+      "explanation": "An explanation of why this topic is relevant to the recipient and how the sender can use it as an icebreaker. Write in two sentences, the first explaining the idea, the second explaining why it is relevant to both the sender and recipient.",
       "subjects": [
         "Suggested email subject line 1",
         "Suggested email subject line 2",
@@ -214,7 +228,7 @@ The JSON format should follow this structure, with **at least 5 items** in both 
     },
     {
       "headline": "Emoji: A fifth headline for the icebreaker topic",
-      "explanation": "Another explanation relevant to the recipient.",
+      "explanation": "An explanation of why this topic is relevant to the recipient and how the sender can use it as an icebreaker. Write in two sentences, the first explaining the idea, the second explaining why it is relevant to both the sender and recipient.",
       "subjects": [
         "Suggested email subject line 1",
         "Suggested email subject line 2",
@@ -238,7 +252,21 @@ Ensure that:
 - There are at least 5 items in both the \`commonGround\` and \`iceBreakers\` sections.
 - The response is a **pure, valid JSON string** without any additional characters or explanations.
 - The JSON can be parsed directly by \`JSON.parse()\` without errors. 
-- If there is any issue with generating valid JSON, return an empty JSON object \`{}\`.`
+- If there is any issue with generating valid JSON, return an empty JSON object \`{}\`.
+-Use best practices when crafting email subjective lines and openers. Consider best practices from these email leaders:
+
+
+Alex Berman (Teaches agencies how to generate leads using hyper-personalized cold emails focused on engaging first lines).
+Aaron Ross (Introduced scalable outbound sales with cold emails, advocating segmentation and targeting decision-makers).
+Steli Efti (Emphasizes urgency and persistence, with follow-ups as a critical component of cold outreach success).
+Bryan Kreuzberger (Crafts cold emails for executives, focusing on simple, frictionless requests that prompt easy responses).
+Josh Braun (Applies psychology-driven tactics, using curiosity and empathy to create attention-grabbing emails).
+Becc Holland (Advocates for hyper-personalization at scale, aligning cold emails with individual recipients' priorities and roles).
+Jeremy Donovan (Focuses on data-driven cold emails, experimenting with subject lines and messaging to optimize response rates).
+Patrick Dang (Teaches modern cold email strategies centered on storytelling and relationship-building over hard pitches).
+Sam Nelson (Popularized "Sequences" in cold outreach, showing how multiple, well-timed emails drive engagement).
+John Barrows (Offers practical frameworks for outbound emails, focusing on relevance and value to the recipient).
+`
 
     const userPrompt =
       convertProfileDataToString(profileDataSender, 'Sender') +

@@ -13,7 +13,7 @@ export const getMetadata = cache(async (brand: string) => {
     )
 
     const preloadRes = await fetcher(
-      `${antelopeEndpoint}/chatbots/preloads?shortcode=${brand}`
+      `${antelopeEndpoint}/chatbots/preloads?origin=leadgen&shortcode=${brand}`
     );
     const { urls } = preloadRes.data || {};
 

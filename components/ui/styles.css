@@ -161,3 +161,6 @@
   text-decoration-thickness: 3px;
   text-underline-offset: 4px;
 }
+.underline:hover {
+  font-style: italic;
+}

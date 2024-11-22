@@ -35,14 +35,7 @@ export function Explainer({
   className,
   isInView = true
 }: IExplainer) {
-  const [isVisible, setVisible] = useState(false)
   const { width: windowWidth } = useWindowSize()
-
-  useEffect(() => {
-    if (isInView) {
-      setVisible(true)
-    }
-  }, [isInView])
 
   return (
     <div
@@ -80,11 +73,11 @@ export function Explainer({
         </div>
 
         <Button
-          variant={isVisible ? 'default' : 'ghost'}
+          variant={isInView ? 'default' : 'ghost'}
           size={'lg'}
           className="border-white border-solid border-[1px] border-opacity-20 h-8 md:h-[60px] text-base md:text-lg"
           style={{
-            backgroundColor: !isVisible
+            backgroundColor: !isInView
               ? ''
               : urgency === 'critical'
                 ? '#ea3f3f'

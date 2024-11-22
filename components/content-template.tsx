@@ -119,7 +119,12 @@ export const ContentTemplate = ({
               </>
             )}
             {child.type === 'map' && <MapChart {...child} />}
-            {child.type === 'explainer' && <Explainer {...child} />}
+            {child.type === 'explainer' && (
+              <Explainer
+                {...child}
+                isInView={index <= (children.length - 1) * carouselProgress}
+              />
+            )}
           </Fragment>
         ))}
       </ElementsWrapper>

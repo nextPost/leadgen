@@ -132,11 +132,6 @@
   background-color: #243b4a; /* Alternate row background */
 }
 
-.image-container {
-  width: 40px !important;
-  height: 40px !important;
-}
-
 .focus {
   padding: 2px;
   border-radius: 2px;

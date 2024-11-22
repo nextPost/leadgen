@@ -36,6 +36,7 @@ export function Explainer({
   isInView = true
 }: IExplainer) {
   const [isVisible, setVisible] = useState(false)
+  const { width: windowWidth } = useWindowSize()
 
   useEffect(() => {
     if (isInView) {
@@ -50,12 +51,12 @@ export function Explainer({
       <div className="flex flex-col gap-2 md:gap-3">
         <div className="flex justify-between">
           <div className="flex gap-3">
-            <div className="image-container p-2 bg-[#35474F] rounded-sm">
+            <div className="w-8 h-7 md:!h-10 md:!w-10 p-1 md:p-2 bg-[#35474F] rounded-sm">
               <img
                 src={`/image-icons/${urgency}.png`}
                 style={{
-                  height: '24px',
-                  width: '24px'
+                  height: windowWidth < 768 ? '16px' : '24px',
+                  width: windowWidth < 768 ? '16px' : '24px'
                 }}
                 alt="urgency"
               />
@@ -64,13 +65,16 @@ export function Explainer({
           </div>
         </div>
 
-        <div className="" dangerouslySetInnerHTML={{ __html: texts[0] }}></div>
+        <div
+          className="text-sm md:text-base"
+          dangerouslySetInnerHTML={{ __html: texts[0] }}
+        ></div>
         <div>
           <div
-            className=""
+            className="text-sm md:text-base"
             dangerouslySetInnerHTML={{ __html: texts[1] }}
           ></div>
-          <div className="my-2 px-4 py-8 rounded-md bg-[#3D5057] text-center">
+          <div className="text-sm md:text-base my-2 px-2 md:px-4 py-4 md:py-8 rounded-md bg-[#3D5057] text-center">
             {detail.texts[0]}
           </div>
         </div>
@@ -78,7 +82,7 @@ export function Explainer({
         <Button
           variant={isVisible ? 'default' : 'ghost'}
           size={'lg'}
-          className="border-white border-solid border-[1px] border-opacity-20 h-8 md:h-[60px] text-lg"
+          className="border-white border-solid border-[1px] border-opacity-20 h-8 md:h-[60px] text-base md:text-lg"
           style={{
             backgroundColor: !isVisible
               ? ''
@@ -91,7 +95,7 @@ export function Explainer({
           onClick={() => window.open(link.target)}
         >
           <div className="mr-1">{link.caption}</div>
-          <ArrowTopRightIcon fontSize={'18px'} />
+          <ArrowTopRightIcon fontSize={windowWidth < 768 ? '12px' : '18px'} />
         </Button>
       </div>
     </div>

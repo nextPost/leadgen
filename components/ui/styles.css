@@ -162,5 +162,5 @@
   text-underline-offset: 4px;
 }
 .underline:hover {
-  font-style: italic;
+  font-weight: bold;
 }

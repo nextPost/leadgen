@@ -161,6 +161,13 @@
   text-decoration-thickness: 3px;
   text-underline-offset: 4px;
 }
-.underline:hover {
-  font-weight: bold;
+
+.underline.critical:hover {
+  color: #ea3f3f;
+}
+.underline.suggested:hover {
+  color: #ffa34e;
+}
+.underline.consider:hover {
+  color: #24ae8d;
 }

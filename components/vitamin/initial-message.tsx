@@ -90,7 +90,9 @@ export function InitialMessage() {
           <CardSkeleton />
         )}
       </BotCard>
-
+      <BotCard>
+        <ResearchRecommendations />
+      </BotCard>
       {isBypassMode && (
         <>
           <BotCard>

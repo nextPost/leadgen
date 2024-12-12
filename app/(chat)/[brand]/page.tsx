@@ -19,8 +19,7 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { brand } = params
-  await fetch(`${antelopeEndpoint}/cache/clear`)
-  console.log('cache cleared')
+
   const metadata = await getMetadata(brand)
   if (!metadata) {
     redirect('https://antelopeinc.com/')

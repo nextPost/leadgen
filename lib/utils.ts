@@ -94,6 +94,26 @@ export const getMetaDataOnClient = async (brand: string | string[]) => {
     const response = await fetcher(
       `${antelopeEndpoint}/chatbots/intro?origin=leadgen&shortcode=${brand}`
     )
+
+    const preloadRes = await fetcher(
+      `${antelopeEndpoint}/chatbots/preloads?origin=leadgen&shortcode=${brand}`
+    )
+
+    const { urls } = preloadRes || {}
+
+    if (urls && Array.isArray(urls)) {
+      Promise.allSettled(urls.map(url => fetcher(url)))
+        .then(backgroundResults => {
+          console.log(
+            'Background fetch results:',
+            JSON.stringify(backgroundResults)
+          )
+          // Optionally handle or log the results
+        })
+        .catch(err => console.log('Background fetch error:', err))
+        .finally(() => console.log('Background fetch complete'))
+    }
+
     const { data } = response
     console.log('getMetaDataOnClient', { response })
     return {

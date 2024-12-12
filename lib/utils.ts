@@ -91,6 +91,9 @@ export const getMessageFromCode = (resultCode: string) => {
 
 export const getMetaDataOnClient = async (brand: string | string[]) => {
   try {
+    await fetch(`${antelopeEndpoint}/cache/clear`)
+    console.log('cache cleared')
+
     const response = await fetcher(
       `${antelopeEndpoint}/chatbots/intro?origin=leadgen&shortcode=${brand}`
     )

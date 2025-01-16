@@ -2,6 +2,7 @@ import * as Progress from '@radix-ui/react-progress'
 import React from 'react'
 import Image from 'next/image'
 import { useWindowSize } from 'usehooks-ts'
+import { useLeadgenContext } from '@/lib/context/leadgen-context'
 
 interface SocialScoreBar {
   title: string
@@ -22,6 +23,8 @@ export function SocialScoreBar({
 }: SocialScoreBar) {
   const [progress, setProgress] = React.useState(20)
   const { width: windowWidth } = useWindowSize()
+  const { brandLogoUrl } = useLeadgenContext()
+
   React.useEffect(() => {
     if (isInview) {
       setProgress(20 + (value * 80) / 100)
@@ -63,7 +66,7 @@ export function SocialScoreBar({
             }}
           />
           <img
-            src="/vitamin/logos/renzos.png"
+            src={brandLogoUrl}
             height={windowWidth > 768 ? 60 : 32}
             width={windowWidth > 768 ? 60 : 32}
             alt="renzos-indicator"

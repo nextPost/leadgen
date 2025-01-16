@@ -15,7 +15,8 @@ import { useWindowSize } from 'usehooks-ts'
 import Image from 'next/image'
 import { useState } from 'react'
 import { phone } from 'phone'
-import { sleep } from '@/lib/utils'
+import { fetcher, sleep } from '@/lib/utils'
+import { antelopeEndpoint } from '@/lib/constants/config'
 
 export function SendUsMessage() {
   const { width: windowWidth } = useWindowSize()
@@ -28,7 +29,7 @@ export function SendUsMessage() {
     e.preventDefault()
 
     const data = Object.fromEntries(new FormData(e.target as HTMLFormElement))
-    if (!phone(data.phone as string).isValid) {
+    if (data.phone as string && !phone(data.phone as string).isValid) {
       setServerErrors({
         phoneNumber: true
       })
@@ -39,7 +40,10 @@ export function SendUsMessage() {
       })
     }
     // data.phone = phone(data.phone as string).phoneNumber
-    //  TODO: Send data to the server
+    await fetcher(`${antelopeEndpoint}/chatbots/contact?origin=leadgen`, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    })
 
     setMessages(currentMessages => [
       ...currentMessages,
@@ -188,7 +192,6 @@ export function SendUsMessage() {
               radius="large"
               placeholder="Phone"
               type="tel"
-              required
               style={{
                 height: windowWidth > 768 ? 50 : 42,
                 padding: '0 16px',
@@ -297,7 +300,6 @@ export function SendUsMessage() {
               size={windowWidth > 768 ? '3' : '1'}
               radius="large"
               placeholder="Subject"
-              required
               style={{
                 height: windowWidth > 768 ? 50 : 42,
                 padding: '0 16px',
@@ -343,7 +345,6 @@ export function SendUsMessage() {
               size={windowWidth > 768 ? '3' : '1'}
               resize="vertical"
               placeholder="Tell us about your project"
-              required
               style={{
                 height: windowWidth > 768 ? 186 : 122,
                 padding: '8px 16px',

@@ -268,7 +268,9 @@ const BookDemo = () => {
     <p>
       To connect with a member of our team, please{' '}
       <a
-        onClick={() => openScheduleDialog(true)}
+        // onClick={() => openScheduleDialog(true)}
+        href="https://calendly.com/meetwithantelope/antelope-demo"
+        target="_blank"
         className="italic hover:underline text-primary cursor-pointer"
       >
         click this link

@@ -87,9 +87,7 @@ export function FeedbackAnalysis() {
             </Carousel>
           </div>
           <p className="text-sm md:text-base">
-            Deeper drilldown into feedback suggests that overall sentiment is
-            overwhelmingly positive, with reviewers consistently praising
-            innovative products and exceptional customer experiences
+            {channelFeedbackContent.footer[0]}
           </p>
           <FooterButtonGroup
             submitCaption="Content Analysis"

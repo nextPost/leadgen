@@ -44,7 +44,7 @@ export function Explainer({
       <div className="flex flex-col gap-2 md:gap-3">
         <div className="flex justify-between">
           <div className="flex gap-3">
-            <div className="w-8 h-7 md:!h-10 md:!w-10 p-1 md:p-2 bg-[#35474F] rounded-sm">
+            <div className="w-8 h-7 md:!h-10 md:!w-10 p-1 md:p-2 bg-[#35474F] rounded-sm flex items-center justify-center">
               <img
                 src={`/image-icons/${urgency}.png`}
                 style={{
@@ -54,12 +54,14 @@ export function Explainer({
                 alt="urgency"
               />
             </div>
-            <h3 className="text-base md:text-2xl font-semibold">{title}</h3>
+            <h3 className="text-base md:text-2xl font-semibold h-[48px] md:h-[64px]">
+              {title}
+            </h3>
           </div>
         </div>
 
         <div
-          className="text-sm md:text-base"
+          className="text-sm md:text-base h-[120px] md:h-[96px]"
           dangerouslySetInnerHTML={{ __html: texts[0] }}
         ></div>
         <div>
@@ -67,7 +69,7 @@ export function Explainer({
             className="text-sm md:text-base"
             dangerouslySetInnerHTML={{ __html: texts[1] }}
           ></div>
-          <div className="text-sm md:text-base my-2 px-2 md:px-4 py-4 md:py-8 rounded-md bg-[#3D5057] text-center">
+          <div className="text-sm md:text-base my-2 px-2 md:px-4 py-4 md:py-8 rounded-md bg-[#3D5057] text-center h-[160px]">
             {detail.texts[0]}
           </div>
         </div>

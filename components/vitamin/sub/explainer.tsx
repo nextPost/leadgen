@@ -69,7 +69,7 @@ export function Explainer({
             className="text-sm md:text-base"
             dangerouslySetInnerHTML={{ __html: texts[1] }}
           ></div>
-          <div className="text-sm md:text-base my-2 px-2 md:px-4 py-4 md:py-8 rounded-md bg-[#3D5057] text-center h-[160px]">
+          <div className="text-sm md:text-base my-2 p-2 md:p-4 rounded-md bg-[#3D5057] text-center h-[160px]">
             {detail.texts[0]}
           </div>
         </div>

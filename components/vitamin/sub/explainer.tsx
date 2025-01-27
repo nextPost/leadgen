@@ -42,8 +42,8 @@ export function Explainer({
       className={`p-3 md:p-5 flex flex-col justify-between bg-[#293D45] rounded-lg w-[224px] md:w-[412px] h-full ${className}`}
     >
       <div className="flex flex-col gap-2 md:gap-3">
-        <div className="flex justify-between">
-          <div className="flex gap-3">
+        <div className="flex gap-3 h-[48px] md:h-[64px]">
+          <div className="flex items-center">
             <div className="w-8 h-7 md:!h-10 md:!w-10 p-1 md:p-2 bg-[#35474F] rounded-sm flex items-center justify-center">
               <img
                 src={`/image-icons/${urgency}.png`}
@@ -54,9 +54,9 @@ export function Explainer({
                 alt="urgency"
               />
             </div>
-            <h3 className="text-base md:text-2xl font-semibold h-[48px] md:h-[64px]">
-              {title}
-            </h3>
+          </div>
+          <div className='flex items-center'>
+            <h3 className="text-base md:text-2xl font-semibold">{title}</h3>
           </div>
         </div>
 

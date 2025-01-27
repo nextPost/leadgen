@@ -61,15 +61,15 @@ export function Explainer({
         </div>
 
         <div
-          className="text-sm md:text-base h-[120px] md:h-[96px]"
+          className="text-sm md:text-base h-[140px] md:h-[96px]"
           dangerouslySetInnerHTML={{ __html: texts[0] }}
         ></div>
         <div>
           <div
-            className="text-sm md:text-base"
+            className="text-sm md:text-base h-[40px]"
             dangerouslySetInnerHTML={{ __html: texts[1] }}
           ></div>
-          <div className="text-sm md:text-base my-2 p-2 md:p-4 rounded-md bg-[#3D5057] text-center h-[152px] md:h-[144px]">
+          <div className="text-sm md:text-base my-2 p-2 md:p-4 rounded-md bg-[#3D5057] text-center h-[112px]">
             {detail.texts[0]}
           </div>
         </div>

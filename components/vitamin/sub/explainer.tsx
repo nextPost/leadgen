@@ -39,7 +39,7 @@ export function Explainer({
 
   return (
     <div
-      className={`p-3 md:p-5 flex flex-col justify-between bg-[#293D45] rounded-lg w-[224px] md:w-[412px] h-full ${className}`}
+      className={`p-3 md:p-5 flex flex-col justify-between bg-[#293D45] rounded-lg w-[230px] md:w-[412px] h-full ${className}`}
     >
       <div className="flex flex-col gap-2 md:gap-3">
         <div className="flex gap-3 h-[48px] md:h-[64px]">
@@ -56,20 +56,20 @@ export function Explainer({
             </div>
           </div>
           <div className='flex items-center'>
-            <h3 className="text-base md:text-2xl font-semibold">{title}</h3>
+            <h3 className="text-sm md:text-2xl font-semibold">{title}</h3>
           </div>
         </div>
 
         <div
-          className="text-sm md:text-base h-[140px] md:h-[96px]"
+          className="text-xs md:text-base h-[80px] md:h-[96px]"
           dangerouslySetInnerHTML={{ __html: texts[0] }}
         ></div>
         <div>
           <div
-            className="text-sm md:text-base h-[40px]"
+            className="text-xs md:text-base h-[24px] md:h-[40px]"
             dangerouslySetInnerHTML={{ __html: texts[1] }}
           ></div>
-          <div className="text-sm md:text-base my-2 p-2 md:p-4 rounded-md bg-[#3D5057] text-center h-[112px]">
+          <div className="text-xs md:text-base my-2 p-2 md:p-4 rounded-md bg-[#3D5057] text-center h-[80px] md:h-[112px] flex items-center">
             {detail.texts[0]}
           </div>
         </div>

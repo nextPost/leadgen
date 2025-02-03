@@ -9,6 +9,7 @@ import { ReactElement, useMemo } from 'react'
 import { useUIState } from 'ai/rsc'
 import { AI } from '@/lib/chat/actions'
 import { showPrompts } from '@/lib/chat/prompt'
+import { calendlyBookLink } from '@/lib/constants/public-constants'
 
 interface FooterButtonGroupProps {
   submitCaption: string
@@ -30,17 +31,25 @@ export const FooterButtonGroup = ({
   const onClick = async (
     prompt: string,
     response: ReactElement,
-    isCycleButton: boolean
+    isCycleButton: boolean,
+    onClick?: () => void
   ) => {
     if (isCycleButton) {
       setFooterButtonIndex(footerButtonIndex + 1)
+    }
+    if (onClick) {
+      onClick()
+      return;
     }
 
     await showPrompts(
       prompt,
       <div className="flex flex-col gap-4">
         {response}
-        <FooterButtonGroup submitCaption={submitCaption} onSubmit={onSubmit} />
+        <FooterButtonGroup
+          submitCaption={submitCaption}
+          onSubmit={onSubmit}
+        />
       </div>,
       setMessages
     )
@@ -71,14 +80,15 @@ export const FooterButtonGroup = ({
       </p>
       <div className="flex flex-wrap">
         {[cycleButtons[footerButtonIndex], ...availableButtons].map(
-          (availableButton, index) => (
+          (availableButton: {caption: string, response: JSX.Element, onClick?: () => void}, index) => (
             <div className="p-1 md:p-2 w-[50%]" key={index}>
               <Button
                 onClick={() =>
                   onClick(
                     availableButton.caption,
                     availableButton.response,
-                    index === 0
+                    index === 0,
+                    availableButton?.onClick
                   )
                 }
                 size={windowWidth > 768 ? '3' : '1'}
@@ -269,7 +279,7 @@ const BookDemo = () => {
       To connect with a member of our team, please{' '}
       <a
         // onClick={() => openScheduleDialog(true)}
-        href="https://calendly.com/meetwithantelope/antelope-demo"
+        href={calendlyBookLink}
         target="_blank"
         className="italic hover:underline text-primary cursor-pointer"
       >
@@ -315,6 +325,11 @@ const availableButtons = [
   },
   {
     caption: 'Book a Demo',
-    response: <BookDemo />
+    response: <BookDemo />,
+    onClick: () =>
+      window.open(
+        calendlyBookLink,
+        '_blank'
+      )
   }
 ]

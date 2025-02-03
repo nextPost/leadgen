@@ -11,6 +11,7 @@ import { fetcher, safeCall } from '@/lib/utils'
 import { showPrompts } from '@/lib/chat/prompt'
 import { useParams } from 'next/navigation'
 import { CardSkeleton } from '../ui/card-skeleton'
+import { calendlyBookLink } from '@/lib/constants/public-constants'
 
 export function ResearchRecommendations() {
   const [_, setMessages] = useUIState<typeof AI>()
@@ -35,7 +36,7 @@ export function ResearchRecommendations() {
     if (index === 1) {
       await showPrompts('Contact Antelope', <SendUsMessage />, setMessages)
     } else {
-      window.open(companyUrl, '_blank')
+      window.open(calendlyBookLink, '_blank')
     }
   }
 

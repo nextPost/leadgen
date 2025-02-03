@@ -15,6 +15,7 @@ interface SocialRatingCardProps {
   averageScoreInset: string
   industryAverageScore: number
   className?: string
+  tooltip: string
   isInView?: boolean
 }
 
@@ -29,6 +30,7 @@ export function SocialRatingCard({
   averageScoreInset,
   industryAverageScore,
   className,
+  tooltip,
   isInView = true
 }: SocialRatingCardProps) {
   const { width: windowWidth } = useWindowSize()
@@ -50,7 +52,7 @@ export function SocialRatingCard({
             {title}
           </h2>
         </div>
-        <PrimaryTooltip description="Influencer activity looks at the relative share of sponsored mentions and engagement among competitors" />
+        <PrimaryTooltip description={tooltip} />
       </div>
       <p className="text-sm md:text-base">{description}</p>
       <hr className="border-[#35474F]" />

@@ -75,6 +75,7 @@ export function FeedbackAnalysis() {
                     averageScore={child.children[1].value.percent}
                     averageScoreInset={child.children[1].inset}
                     industryAverageScore={child.children[1].industry}
+                    tooltip={child.tooltip}
                     key={index}
                     isInView={
                       index <=

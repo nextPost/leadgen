@@ -107,10 +107,10 @@ export const getMetaDataOnClient = async (brand: string | string[]) => {
     if (urls && Array.isArray(urls)) {
       Promise.allSettled(urls.map(url => fetcher(url)))
         .then(backgroundResults => {
-          console.log(
-            'Background fetch results:',
-            JSON.stringify(backgroundResults)
-          )
+          // console.log(
+          //   'Background fetch results:',
+          //   JSON.stringify(backgroundResults)
+          // )
           // Optionally handle or log the results
         })
         .catch(err => console.log('Background fetch error:', err))
@@ -118,7 +118,7 @@ export const getMetaDataOnClient = async (brand: string | string[]) => {
     }
 
     const { data } = response
-    console.log('getMetaDataOnClient', { response })
+    // console.log('getMetaDataOnClient', { response })
     return {
       title: data.header,
       desc: data.texts,

@@ -113,7 +113,7 @@ const cycleButtons = [
     caption: 'Tell Me About Antelope',
     response: (
       <div>
-        <div
+        {/* <div
           style={{
             position: 'relative',
             paddingBottom: '56.25%',
@@ -135,11 +135,11 @@ const cycleButtons = [
               height: '100%'
             }}
           />
-        </div>
-        {/* <video width="200" controls>
+        </div> */}
+        <video width="200" controls>
           <source src="/videos/Antelope Demo V1.mp4" type="video/mp4" />
           Your browser does not support the video tag.
-        </video> */}
+        </video>
         <p className='mt-4'>
           Antelope is a strategy and insights team that turns your
           industry&apos;s content and customer feedback into customized research

@@ -20,13 +20,15 @@ export function ResearchRecommendations() {
 
   //  TODO: combine with server component
   useEffect(() => {
-    safeCall(() =>
-      fetcher(
-        `${antelopeEndpoint}/chatbots/recos?origin=leadgen&shortcode=${brand}`
-      ).then(res => {
-        setRecommendation(res.data)
-      })
-    )
+    setTimeout(() => {
+      safeCall(() =>
+        fetcher(
+          `${antelopeEndpoint}/chatbots/recos?origin=leadgen&shortcode=${brand}`
+        ).then(res => {
+          setRecommendation(res.data)
+        })
+      )
+    }, 2000)
   }, [])
 
   const onClick = async (index: number) => {

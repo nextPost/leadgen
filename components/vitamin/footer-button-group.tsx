@@ -112,20 +112,49 @@ const cycleButtons = [
   {
     caption: 'Tell Me About Antelope',
     response: (
-      <p>
-        Antelope is a strategy and insights team that turns your industry&apos;s
-        content and customer feedback into customized research with artificial
-        intelligence. We leverage cutting-edge AI to analyze your customer
-        feedback and content at scale. For more details,{' '}
-        <Link
-          href={`${companyUrl}/#banner`}
-          target="_blank"
-          rel="noreferrer"
-          className="italic hover:underline text-primary"
+      <div>
+        <div
+          style={{
+            position: 'relative',
+            paddingBottom: '56.25%',
+            height: 0,
+            overflow: 'hidden',
+            maxWidth: '100%',
+            background: '#000'
+          }}
         >
-          visit our website.
-        </Link>
-      </p>
+          <iframe
+            src="https://www.youtube.com/watch?v=pz44OZFQVCM"
+            frameBorder="0"
+            allowFullScreen
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%'
+            }}
+          />
+        </div>
+        {/* <video width="200" controls>
+          <source src="/videos/Antelope Demo V1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video> */}
+        <p className='mt-4'>
+          Antelope is a strategy and insights team that turns your
+          industry&apos;s content and customer feedback into customized research
+          with artificial intelligence. We leverage cutting-edge AI to analyze
+          your customer feedback and content at scale. For more details,{' '}
+          <Link
+            href={`${companyUrl}/#banner`}
+            target="_blank"
+            rel="noreferrer"
+            className="italic hover:underline text-primary"
+          >
+            visit our website.
+          </Link>
+        </p>
+      </div>
     )
   },
   {

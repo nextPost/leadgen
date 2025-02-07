@@ -118,8 +118,6 @@ const cycleButtons = [
     response: (
       <div>
         <iframe
-          width="560"
-          height="315"
           src="https://www.youtube.com/embed/YaMUUHfG03Q?si=vtHrTBY9nAoI5TDi"
           title="YouTube video player"
           frameBorder="0"

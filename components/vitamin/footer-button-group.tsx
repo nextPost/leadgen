@@ -117,15 +117,18 @@ const cycleButtons = [
     caption: 'Tell Me About Antelope',
     response: (
       <div>
-        <iframe
-          src="https://www.youtube.com/embed/YaMUUHfG03Q?si=vtHrTBY9nAoI5TDi"
-          title="YouTube video player"
-          frameBorder="0"
-          width={'100%'}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
-        ></iframe>
+        <div className="relative w-[100%] pt-[100%]">
+          <iframe
+            src="https://www.youtube.com/embed/YaMUUHfG03Q?si=vtHrTBY9nAoI5TDi?autoplay=1"
+            title="YouTube video player"
+            frameBorder="0"
+            width={'100%'}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+            className="absolute top-0 left-0 w-full h-full"
+          ></iframe>
+        </div>
         {/* <video width="100%" controls>
           <source
             src={

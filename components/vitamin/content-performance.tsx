@@ -60,7 +60,11 @@ export function ContentPerformance() {
               </p>
               <FooterButtonGroup
                 submitCaption="Suggest Research"
-                helperText="To get strategic recommendations, select below:"
+                helperText={
+                  channelContentPerformance.continuationText
+                    ? channelContentPerformance.continuationText[0]
+                    : 'To get strategic recommendations, select below:'
+                }
                 onSubmit={onClick}
               />
             </>

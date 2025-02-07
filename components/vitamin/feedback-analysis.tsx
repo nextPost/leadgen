@@ -92,7 +92,11 @@ export function FeedbackAnalysis() {
           </p>
           <FooterButtonGroup
             submitCaption="Content Analysis"
-            helperText="To compare content performance, select below:"
+            helperText={
+              feedbackContent.continuationText
+                ? feedbackContent.continuationText[0]
+                : 'To compare content performance, select below:'
+            }
             onSubmit={onClick}
           />
         </div>

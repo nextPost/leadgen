@@ -43,7 +43,11 @@ export function DataOverview() {
           footerComponent={
             <FooterButtonGroup
               submitCaption="Start Comparison"
-              helperText="To run the comparison, select below:"
+              helperText={
+                content.continuationText
+                  ? content.continuationText[0]
+                  : 'To run the comparison, select below:'
+              }
               onSubmit={onClick}
             />
           }

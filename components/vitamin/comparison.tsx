@@ -124,7 +124,11 @@ export const Comparison: React.FC<ComparisonProps> = ({}) => {
               <p className="text-sm md:text-base">{weaknessContent?.footer}</p>
               <FooterButtonGroup
                 submitCaption="Feedback Analysis"
-                helperText="To compare customer feedback, select below:"
+                helperText={
+                  weaknessContent.continuationText
+                    ? weaknessContent.continuationText[0]
+                    : 'To compare customer feedback, select below:'
+                }
                 onSubmit={onClick}
               />
             </>

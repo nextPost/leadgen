@@ -121,6 +121,7 @@ const cycleButtons = [
           src="https://www.youtube.com/embed/YaMUUHfG03Q?si=vtHrTBY9nAoI5TDi"
           title="YouTube video player"
           frameBorder="0"
+          width={'100%'}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen

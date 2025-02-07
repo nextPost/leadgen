@@ -39,17 +39,14 @@ export const FooterButtonGroup = ({
     }
     if (onClick) {
       onClick()
-      return;
+      return
     }
 
     await showPrompts(
       prompt,
       <div className="flex flex-col gap-4">
         {response}
-        <FooterButtonGroup
-          submitCaption={submitCaption}
-          onSubmit={onSubmit}
-        />
+        <FooterButtonGroup submitCaption={submitCaption} onSubmit={onSubmit} />
       </div>,
       setMessages
     )
@@ -80,7 +77,14 @@ export const FooterButtonGroup = ({
       </p>
       <div className="flex flex-wrap">
         {[cycleButtons[footerButtonIndex], ...availableButtons].map(
-          (availableButton: {caption: string, response: JSX.Element, onClick?: () => void}, index) => (
+          (
+            availableButton: {
+              caption: string
+              response: JSX.Element
+              onClick?: () => void
+            },
+            index
+          ) => (
             <div className="p-1 md:p-2 w-[50%]" key={index}>
               <Button
                 onClick={() =>
@@ -136,11 +140,18 @@ const cycleButtons = [
             }}
           />
         </div> */}
-        <video width="200" controls>
-          <source src="/videos/Antelope Demo V1.mp4" type="video/mp4" />
+        <video width="100%" controls>
+          <source
+            src={
+              window.innerWidth > 768
+                ? '/videos/Antelope Demo 1x1.mp4'
+                : '/videos/Antelope Demo V1.mp4'
+            }
+            type="video/mp4"
+          />
           Your browser does not support the video tag.
         </video>
-        <p className='mt-4'>
+        <p className="mt-4">
           Antelope is a strategy and insights team that turns your
           industry&apos;s content and customer feedback into customized research
           with artificial intelligence. We leverage cutting-edge AI to analyze
@@ -355,10 +366,6 @@ const availableButtons = [
   {
     caption: 'Book a Demo',
     response: <BookDemo />,
-    onClick: () =>
-      window.open(
-        calendlyBookLink,
-        '_blank'
-      )
+    onClick: () => window.open(calendlyBookLink, '_blank')
   }
 ]

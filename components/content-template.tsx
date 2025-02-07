@@ -23,7 +23,7 @@ export interface IContainer {
   continuationText?: string[]
   icon?: string
   tooltip?: string
-  children: (
+  children?: (
     | IContainer
     | IScoreCard
     | IScalar
@@ -84,64 +84,65 @@ export const ContentTemplate = ({
         </div>
         {tooltip && <PrimaryTooltip description={tooltip} />}
       </div>
-
       {texts?.map((text, index) => (
         <p className="text-xs md:text-base" key={index}>
           {text}
         </p>
       ))}
+      {children && children?.length > 0 && (
+        <>
+          <ElementsWrapper
+            type={type}
+            child={children[0]}
+            caption={caption}
+            setCarouselProgress={setCarouselProgress}
+          >
+            {children.map((child, index) => (
+              <Fragment key={index}>
+                {child.display === 'container' && (
+                  <ContentTemplate
+                    {...child}
+                    containerClassName="gap-1 md:gap-2"
+                    isSubContainer={true}
+                  />
+                )}
+                {child.type === 'scorecard' && <ScoreCard {...child} />}
+                {child.type === 'scalar' && <Scalar flag={flag} {...child} />}
+                {child.type === 'gauge' && (
+                  <>
+                    <GaugeCard
+                      {...child}
+                      isInView={
+                        index <= (children.length - 1) * carouselProgress + 1
+                      }
+                    />
+                  </>
+                )}
+                {child.type === 'map' && <MapChart {...child} />}
+                {child.type === 'explainer' && (
+                  <Explainer
+                    {...child}
+                    isInView={index <= (children.length - 1) * carouselProgress}
+                  />
+                )}
+              </Fragment>
+            ))}
+          </ElementsWrapper>
 
-      <ElementsWrapper
-        type={type}
-        child={children[0]}
-        caption={caption}
-        setCarouselProgress={setCarouselProgress}
-      >
-        {children.map((child, index) => (
-          <Fragment key={index}>
-            {child.display === 'container' && (
-              <ContentTemplate
-                {...child}
-                containerClassName="gap-1 md:gap-2"
-                isSubContainer={true}
-              />
-            )}
-            {child.type === 'scorecard' && <ScoreCard {...child} />}
-            {child.type === 'scalar' && <Scalar flag={flag} {...child} />}
-            {child.type === 'gauge' && (
-              <>
-                <GaugeCard
-                  {...child}
-                  isInView={
-                    index <= (children.length - 1) * carouselProgress + 1
-                  }
-                />
-              </>
-            )}
-            {child.type === 'map' && <MapChart {...child} />}
-            {child.type === 'explainer' && (
-              <Explainer
-                {...child}
-                isInView={index <= (children.length - 1) * carouselProgress}
-              />
-            )}
-          </Fragment>
-        ))}
-      </ElementsWrapper>
-
-      {children[0].type === 'scalar' &&
-        (children[0].inset ? (
-          <div className="flex gap-2 text-[#788589] text-sm md:text-base">
-            <p>Industry Avg</p>
-            <p>-----</p>
-          </div>
-        ) : (
-          <div className="hidden md:flex flex-wrap">
-            <div className="w-[180px]" />
-            <img src="/image-icons/ruler.png" height={36} alt="ruler" />
-          </div>
-        ))}
-
+          {children[0].type === 'scalar' &&
+            (children[0].inset ? (
+              <div className="flex gap-2 text-[#788589] text-sm md:text-base">
+                <p>Industry Avg</p>
+                <p>-----</p>
+              </div>
+            ) : (
+              <div className="hidden md:flex flex-wrap">
+                <div className="w-[180px]" />
+                <img src="/image-icons/ruler.png" height={36} alt="ruler" />
+              </div>
+            ))}
+        </>
+      )}
       {footerComponent}
     </div>
   )
@@ -236,12 +237,12 @@ export const ElementsWrapper = ({
 }
 
 const getUrgencyOfContainer = (container: IContainer): Urgency | undefined => {
-  if (container.children.length === 0) return undefined
-  if (container.children[0].display === 'container') {
+  if (container?.children && container?.children.length === 0) return undefined
+  if (container?.children && container.children[0].display === 'container') {
     return getUrgencyOfContainer(container.children[0])
   }
 
-  if (container.children[0].type === 'explainer') {
+  if (container?.children && container.children[0].type === 'explainer') {
     return container.children[0].urgency
   }
   return undefined

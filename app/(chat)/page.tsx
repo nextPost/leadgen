@@ -11,17 +11,17 @@ export default async function IndexPage() {
   // const id = nanoid()
   // const session = (await auth()) as Session
   // const missingKeys = await getMissingKeys()
-  window.onerror = function (message, source, lineno, colno, error) {
-    console.error('Global Error Caught:', message, error)
-  }
+  // window.onerror = function (message, source, lineno, colno, error) {
+  //   console.error('Global Error Caught:', message, error)
+  // }
 
-  window.addEventListener('error', event => {
-    console.error('Unhandled Error:', event.error)
-  })
+  // window.addEventListener('error', event => {
+  //   console.error('Unhandled Error:', event.error)
+  // })
 
-  window.addEventListener('unhandledrejection', event => {
-    console.error('Unhandled Promise Rejection:', event.reason)
-  })
+  // window.addEventListener('unhandledrejection', event => {
+  //   console.error('Unhandled Promise Rejection:', event.reason)
+  // })
 
   return (
     <div className="flex flex-col gap-2">

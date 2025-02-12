@@ -31,6 +31,12 @@ module.exports = {
   redirects: async () => {
     return [
       {
+        source: '/',
+        // has: [{ type: 'host', value: 'localhost:3000' }],
+        destination: 'https://antelopeinc.com',
+        permanent: true
+      },
+      {
         source: '/linkedin-analyzer',
         destination: '/tools/linkedin-analyzer',
         permanent: true

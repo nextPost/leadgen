@@ -124,8 +124,8 @@ export function MapChart({
       name: key,
       x: (Math.log(children[key].x + 1) / Math.log(maxX + 1)) * 90, // maxX equals to 90 out of 100
       y: (Math.log(children[key].y + 1) / Math.log(maxY + 1)) * 90,
-      logo: children[key].logo,
-      isMain: children[key].logo === brandLogoUrl,
+      logo: children[key].logo.replace(/%20/g, ' '),
+      isMain: children[key].logo.replace(/%20/g, ' ') === brandLogoUrl,
       tooltip: children[key].tooltip,
       size: children[key].size,
       key: title + index

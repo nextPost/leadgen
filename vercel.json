@@ -3,5 +3,15 @@
     "app/**/*": {
       "maxDuration": 300
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/igAnalysis/:path*",
+      "destination": "https://v0-daniel-changes-v4-h9h1dt.vercel.app/:path*"
+    },
+    {
+      "source": "/search/:path*",
+      "destination": "https://v0-brand-logo-search.vercel.app/:path*"
+    }
+  ]
 }

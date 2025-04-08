@@ -7,7 +7,7 @@
   "rewrites": [
     {
       "source": "/igAnalysis/:path*",
-      "destination": "https://v0-daniel-changes-v4-h9h1dt.vercel.app/:path*"
+      "destination": "https://v0-daniel-changes-v4.vercel.app/igAnalysis/:path*"
     },
     {
       "source": "/search/:path*",

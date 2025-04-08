@@ -6,12 +6,12 @@
   },
   "rewrites": [
     {
-      "source": "/igAnalysis/:path*",
-      "destination": "https://v0-daniel-changes-v4-jt7ygx.vercel.app/:path*"
+      "source": "/igAnalysis",
+      "destination": "https://v0-daniel-changes-v4-jt7ygx.vercel.app/igAnalysis"
     },
     {
-      "source": "/search/:path*",
-      "destination": "https://v0-brand-logo-search.vercel.app/:path*"
+      "source": "/igAnalysis/:path*",
+      "destination": "https://v0-daniel-changes-v4-jt7ygx.vercel.app/igAnalysis/:path*"
     }
   ]
 }

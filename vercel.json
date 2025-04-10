@@ -15,11 +15,11 @@
     },
     {
       "source": "/search",
-      "destination": "https://v0-brand-logo-search.vercel.app/igAnalysis"
+      "destination": "https://v0-brand-logo-search.vercel.app/search"
     },
     {
       "source": "/search/:path*",
-      "destination": "https://v0-brand-logo-search.vercel.app/:path*"
+      "destination": "https://v0-brand-logo-search.vercel.app/search:path*"
     }
   ]
 }

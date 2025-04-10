@@ -7,11 +7,11 @@
   "rewrites": [
     {
       "source": "/igAnalysis",
-      "destination": "https://v0-daniel-changes-v4-jt7ygx.vercel.app/igAnalysis"
+      "destination": "https://v0-daniel-changes-v4.vercel.app/igAnalysis"
     },
     {
       "source": "/igAnalysis/:path*",
-      "destination": "https://v0-daniel-changes-v4-jt7ygx.vercel.app/igAnalysis/:path*"
+      "destination": "https://v0-daniel-changes-v4.vercel.app/igAnalysis/:path*"
     }
   ]
 }

@@ -12,6 +12,14 @@
     {
       "source": "/igAnalysis/:path*",
       "destination": "https://v0-daniel-changes-v4.vercel.app/igAnalysis/:path*"
+    },
+    {
+      "source": "/search",
+      "destination": "https://v0-brand-logo-search.vercel.app/igAnalysis"
+    },
+    {
+      "source": "/search/:path*",
+      "destination": "https://v0-brand-logo-search.vercel.app/:path*"
     }
   ]
 }

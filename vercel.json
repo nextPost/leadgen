@@ -19,7 +19,7 @@
     },
     {
       "source": "/search/:path*",
-      "destination": "https://v0-brand-logo-search.vercel.app/search:path*"
+      "destination": "https://v0-brand-logo-search.vercel.app/search/:path*"
     }
   ]
 }

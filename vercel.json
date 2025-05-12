@@ -14,6 +14,14 @@
       "destination": "https://v0-daniel-changes-v4.vercel.app/igAnalysis/:path*"
     },
     {
+      "source": "/liAnalysis",
+      "destination": "https://v0-daniel-changes-v4.vercel.app/liAnalysis"
+    },
+    {
+      "source": "/liAnalysis/:path*",
+      "destination": "https://v0-daniel-changes-v4.vercel.app/liAnalysis/:path*"
+    },
+    {
       "source": "/search",
       "destination": "https://v0-brand-logo-search.vercel.app/search"
     },

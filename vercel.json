@@ -15,11 +15,11 @@
     },
     {
       "source": "/liAnalysis",
-      "destination": "https://v0-daniel-changes-v4.vercel.app/liAnalysis"
+      "destination": "https://v0-li-strategilizer-bc.vercel.app/liAnalysis"
     },
     {
       "source": "/liAnalysis/:path*",
-      "destination": "https://v0-daniel-changes-v4.vercel.app/liAnalysis/:path*"
+      "destination": "https://v0-li-strategilizer-bc.vercel.app/liAnalysis/:path*"
     },
     {
       "source": "/search",

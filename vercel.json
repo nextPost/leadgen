@@ -31,7 +31,7 @@
     },
     {
       "source": "/metaAnalysis",
-      "destination": "https://meta-ads-analyzer.vercel.app/metaAnalysis"
+      "destination": "https://meta-ads-analyzer.vercel.app/metaAnalysis/index.html"
     },
     {
       "source": "/metaAnalysis/:path*",

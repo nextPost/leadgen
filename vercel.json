@@ -28,6 +28,14 @@
     {
       "source": "/search/:path*",
       "destination": "https://v0-brand-logo-search.vercel.app/search/:path*"
+    },
+    {
+      "source": "/metaAnalysis",
+      "destination": "https://meta-ads-analyzer.vercel.app/metaAnalysis"
+    },
+    {
+      "source": "/metaAnalysis/:path*",
+      "destination": "https://meta-ads-analyzer.vercel.app/metaAnalysis/:path*"
     }
   ]
 }
